@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description: Staged data from our stripe payment app.
+    columns: 
+      - name: payment_id
+        description: Primary key for stg_payments.
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: Foreign key to stg_orders.order_id
+        tests:
+          - test_name: relationships
+            to: ref('stg_orders')
+            field: order_id
+      - name: payment_method
+        description: Type of payment (credit card, etc.)
+        tests:
+          - not_null
+      - name: payment_status
+        description: Indicates whether payment has been completed, etc.
+        tests:
+          - not_null
+      - name: payment_amount
+        description: Amount in USD for this transaction.
+        tests:
+          - not_null
+      - name: created_at
+        description: Timestamp indicating when the payment took place.
+        tests:
+          - not_null
+      - name: batched_at
+        description: Timestamp indicating when the data was loaded into the table. Used for source freshness.
+        tests:
+          - not_null
