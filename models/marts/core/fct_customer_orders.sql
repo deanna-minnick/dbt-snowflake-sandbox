@@ -45,7 +45,7 @@ customer_orders as (
     
     select
         customer_id,
-        min(order_date) as fdos,
+        min(order_date) as first_order_date,
         max(order_date) as most_recent_order_date,
         count(order_id) as number_of_orders
     from orders
@@ -66,12 +66,12 @@ running_clv as (
 final as (
     select
         paid_orders.*,
-        case when customer_orders.fdos = paid_orders.order_placed_at
+        case when customer_orders.first_order_date = paid_orders.order_placed_at
             then 'new'
             else 'return'
-            end as nvsr,
+            end as new_vs_returning,
         running_clv.customer_lifetime_value,
-        customer_orders.fdos
+        customer_orders.first_order_date
     from paid_orders
     left join customer_orders
         on paid_orders.customer_id = customer_orders.customer_id
