@@ -80,5 +80,4 @@ final as (
     order by order_id
 )
 
-
 select * from final
