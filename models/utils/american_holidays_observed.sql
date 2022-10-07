@@ -57,4 +57,4 @@ final as (
     from american_holidays_observed
 )
 
-select * from final where is_observed_holiday = 1
+select * from final
