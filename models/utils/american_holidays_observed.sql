@@ -24,13 +24,13 @@ american_holidays as (
         date_day,
         case 
         ---- New Years Day
-            when date_month = 12 and day_of_month = 31 and day_of_week = 5 then 'New Year''s Day (observed)'
-            when date_month = 1 and day_of_month = 1 and day_of_week not in (0,6) then 'New Year''s Day'
-            when date_month = 1 and day_of_month = 2 and day_of_week = 1 then 'New Year''s Day (observed)'
+            when date_month = 12 and day_of_month = 31 and day_of_week = 5 then '{{ escape_single_quotes("New Year's Day (observed)") }}'
+            when date_month = 1 and day_of_month = 1 and day_of_week not in (0,6) then '{{ escape_single_quotes("New Year's Day") }}'
+            when date_month = 1 and day_of_month = 2 and day_of_week = 1 then '{{ escape_single_quotes("New Year's Day (observed)") }}'
         ---- MLK day ( 3rd Monday in January )
             when date_month = 1 and day_of_week = 1 and ceil(day_of_month / 7) = 3 then 'MLK Day'
         ------ President’s Day ( 3rd Monday in February )
-            when date_month = 2 and day_of_week = 1 and ceil(day_of_month / 7) = 3 then 'President''s Day'
+            when date_month = 2 and day_of_week = 1 and ceil(day_of_month / 7) = 3 then '{{ escape_single_quotes("President's Day") }}'
         ------ Memorial Day ( Last Monday in May )
             when date_month = 5 and day_of_week = 1 and day_of_month > 24 then 'Memorial Day'
         ------ Juneteenth ( starting 2021 )
@@ -44,11 +44,11 @@ american_holidays as (
         ------ Labor Day ( 1st Monday in September )
             when date_month = 9 and day_of_week = 1 and ceil(day_of_month / 7) = 1 then 'Labor Day'
         ------ Indigenous Peoples' Day ( 2nd Monday in October )
-            when date_month = 10 and day_of_week = 1 and ceil(day_of_month / 7) = 2 then 'Indigenous Peoples'' Day'
+            when date_month = 10 and day_of_week = 1 and ceil(day_of_month / 7) = 2 then '{{ escape_single_quotes("Indigenous Peoples' Day") }}'
         ------ Veteran’s Day ( November 11 )
-            when date_month = 11 and day_of_month = 10 and day_of_week = 5 then 'Veterans'' Day (observed)'
-            when date_month = 11 and day_of_month = 11 and day_of_week not in (0,6) then 'Veterans'' Day'
-            when date_month = 11 and day_of_month = 12 and day_of_week = 1 then 'Veterans'' Day (observed)'
+            when date_month = 11 and day_of_month = 10 and day_of_week = 5 then '{{ escape_single_quotes("Veteran’s Day (observed)") }}'
+            when date_month = 11 and day_of_month = 11 and day_of_week not in (0,6) then '{{ escape_single_quotes("Veteran’s Day") }}'
+            when date_month = 11 and day_of_month = 12 and day_of_week = 1 then '{{ escape_single_quotes("Veteran’s Day (observed)") }}'
         ------ Thanksgiving Day ( 4th Thursday in November )
             when date_month = 11 and day_of_week = 4 and ceil(day_of_month / 7) = 4 then 'Thanksgiving'
         ------ Christmas Day ( December 25 )
